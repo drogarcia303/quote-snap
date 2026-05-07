@@ -46,13 +46,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Image and service type are required' })
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.OPENAI_API_SECRET) {
     return res.status(500).json({
-      error: 'OpenAI API key not configured. Add OPENAI_API_KEY to your Vercel environment variables.',
+      error: 'OpenAI API key not configured. Add OPENAI_API_SECRET to your Vercel environment variables.',
     })
   }
 
-  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_SECRET })
 
   const promptText = SYSTEM_PROMPT
     .replace('{serviceType}', serviceType)
